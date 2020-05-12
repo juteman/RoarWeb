@@ -35,18 +35,18 @@ namespace SilentRoar
             _salt = Configuration["Salt"];
             services.AddControllersWithViews();
 
-            // addDbcontext 服务注册
+            // addDbcontext 鏈嶅姟娉ㄥ唽
             services.AddDbContext<AppDbContext>(options =>
                 options.UseInMemoryDatabase("Memory")
             );
 
           
-            // addIdentity 服务注册
+            // addIdentity 鏈嶅姟娉ㄥ唽
             services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<AppDbContext>()
                 .AddDefaultTokenProviders();
 
-            // 登录cookie
+            // 鐧诲綍cookie
             services.ConfigureApplicationCookie(configure =>
             {
                 configure.Cookie.HttpOnly = true;
@@ -86,7 +86,7 @@ namespace SilentRoar
         }
 
         /// <summary>
-        /// 增加admin 权限
+        /// 澧炲姞admin 鏉冮檺
         /// </summary>
         /// <param name="serviceProvider"></param>
         /// <returns></returns>
