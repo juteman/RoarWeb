@@ -1,0 +1,34 @@
+﻿@model SilentRoar.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container col-md-5">
+    <form asp-action="Login">
+        <div class="text-center">
+            <h4>登录用户</h4>
+        </div>
+        <hr />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="UserName" class="control-label"></label>
+            <input asp-for="UserName" class="form-control">
+            <span asp-validation-for="UserName" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Password" class="control-label"></label>
+            <input asp-for="Password" class="form-control">
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="IsPresist" class="custom-checkbox"></label>
+            <input asp-for="IsPresist" class="custom-checkbox">
+            <span asp-validation-for="IsPresist" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="登录" class="btn btn-outline-info" />
+        </div>
+    </form>
+</div>
+
