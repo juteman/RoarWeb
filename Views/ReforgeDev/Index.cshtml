@@ -1,0 +1,17 @@
+@model IEnumerable<ReforgeDev>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container">
+        <div class="text-center">
+            <h4>开发日志列表</h4>
+        </div>
+        @foreach (var item in Model){
+    <ul class="list-group list-group-flush">
+        <li asp-action="Details" asp-route-id="@item.ID" class="list-group-item">@Html.DisplayFor(modelItem => item.Title)</li>
+
+    </ul>
+        }
+        </div>

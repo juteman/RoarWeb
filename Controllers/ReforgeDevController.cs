@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -32,7 +32,7 @@ namespace SilentRoar.Controllers
         }
 
         // GET: ReforgeDev/Create
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
         
@@ -43,7 +43,7 @@ namespace SilentRoar.Controllers
         // 创建Reforge 开发日志页面
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        //[Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(ReforgeDev reforgeDev)
         {
             if (ModelState.IsValid)

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +19,6 @@ namespace SilentRoar.Data
         {
 
         }
-        DbSet<ReforgeDev> reforgeDevs; 
+        DbSet<ReforgeDev> ReforgeDevs { get; set; } 
     }
 }
