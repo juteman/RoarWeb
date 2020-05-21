@@ -1,4 +1,4 @@
-﻿@model SilentRoar.ViewModels.LoginViewModel
+@model SilentRoar.ViewModels.LoginViewModel
 @{
     ViewData["Title"] = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -31,4 +31,8 @@
         </div>
     </form>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

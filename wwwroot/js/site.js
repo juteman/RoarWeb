@@ -6,7 +6,10 @@
     "use strict";
     $(document).ready(function () {
         tinymce.init({
-            selector: 'textarea'
+            selector: 'textarea',
+            plugins: "preview codesample autosave searchreplace autolink media",
+            toolbar: 'codesample | autosave | searchreplace| media',
+            codesample_global_prismjs: true
         });
 
     });

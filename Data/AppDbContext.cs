@@ -19,6 +19,6 @@ namespace SilentRoar.Data
         {
 
         }
-        DbSet<ReforgeDev> ReforgeDevs { get; set; } 
+        public DbSet<ReforgeDev> ReforgeDevs { get; set; } 
     }
 }

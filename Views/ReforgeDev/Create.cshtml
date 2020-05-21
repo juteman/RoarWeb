@@ -35,14 +35,6 @@
         <div>
             <a asp-action="Index" class="btn btn-outline-danger">回到列表</a>
         </div>
-        <div>
-
-            @if (Model != null)
-            {
-                <h1>Sample text submitted:</h1>
-                @Html.Raw(Model.Content);
-            }
-        </div>
 
         @section Scripts {
             @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

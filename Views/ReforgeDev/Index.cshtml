@@ -10,7 +10,18 @@
         </div>
         @foreach (var item in Model){
     <ul class="list-group list-group-flush">
-        <li asp-action="Details" asp-route-id="@item.ID" class="list-group-item">@Html.DisplayFor(modelItem => item.Title)</li>
+        <li class="list-group-item title m-0 text-black-50">
+            <p class="m-0">
+                <u>
+                    <small>
+                        @Html.DisplayFor(modelItem => item.Created)
+                    </small>
+                </u>
+            </p>
+                <a asp-action="Details" asp-route-id="@item.ID" class="text-dark m-0">
+            @Html.DisplayFor(modelItem => item.Title)
+                </a>   
+        </li>
 
     </ul>
         }

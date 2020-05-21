@@ -1,0 +1,20 @@
+@model ReforgeDev
+@{
+    ViewData["Title"] = @Model.Title;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="container">
+        <h2> @Html.DisplayFor(model => model.Title) </h2>
+        <p class="mb-0">@Html.DisplayFor(model => model.Author) </p>
+        <hr />
+        @Html.Raw(Model.Content)
+    </div>
+
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.ID" class="btn btn-warning">编辑 </a>
+        <br />
+        <a asp-action="Index" class="btn btn-outline-danger">回到日志列表</a>
+
+    </div>
+

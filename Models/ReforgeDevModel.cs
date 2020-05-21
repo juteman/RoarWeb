@@ -19,7 +19,7 @@ namespace SilentRoar.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
-        public DateTime Created { get; set; } = DateTime.Now;
+        public string Created { get; set; } = DateTime.Now.ToString("MM/dd/yyyy");
         [Required]
         [Display(Name = "作者")]
         public string Author { get; set; }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using SilentRoar.Data;
 using SilentRoar.Models;
@@ -20,15 +21,29 @@ namespace SilentRoar.Controllers
             _context = context;
         }
       // GET: ReforgeDev
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var reforgeDevs = from s in _context.ReforgeDevs select s;
+            reforgeDevs = reforgeDevs.OrderByDescending(s => s.ID);
+            return View(await reforgeDevs.AsNoTracking().ToListAsync());
         }
 
         // GET: ReforgeDev/Details/5
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var reforgeDev = await _context.ReforgeDevs
+                .FirstOrDefaultAsync(m => m.ID == id);
+            if(reforgeDev == null)
+            {
+                return NotFound();
+            }
+
+            return View(reforgeDev);
         }
 
         // GET: ReforgeDev/Create
@@ -56,27 +71,53 @@ namespace SilentRoar.Controllers
         }
 
         // GET: ReforgeDev/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var reforgeDevLog = await _context.ReforgeDevs.FindAsync(id);
+            if (reforgeDevLog == null)
+            {
+                return NotFound();
+            }
+            return View(reforgeDevLog);
         }
 
         // POST: ReforgeDev/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
-        public ActionResult Edit(int id, IFormCollection collection)
+        //[Authorize(Roles = "Admin")]
+        public async Task<IActionResult> Edit(int id, ReforgeDev reforgeDevLog)
         {
-            try
+            if (id != reforgeDevLog.ID)
             {
-                // TODO: Add update logic here
+                return NotFound();
+            }
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                try
+                {
+                    _context.Update(reforgeDevLog);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ReforgeDevExists(reforgeDevLog.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Details), new {id = reforgeDevLog.ID });
             }
+            return View(reforgeDevLog);
         }
 
         // GET: ReforgeDev/Delete/5
@@ -100,6 +141,11 @@ namespace SilentRoar.Controllers
             {
                 return View();
             }
+        }
+
+        private bool ReforgeDevExists(int id)
+        {
+            return _context.ReforgeDevs.Any(e => e.ID == id);
         }
     }
 }

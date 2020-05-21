@@ -37,7 +37,7 @@ namespace SilentRoar
 
             // addDbcontext 服务注册
             services.AddDbContext<AppDbContext>(options =>
-                options.UseInMemoryDatabase("Memory")
+                options.UseNpgsql(Configuration.GetConnectionString("Reforge"))
             );
 
           
